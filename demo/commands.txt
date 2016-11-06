@@ -1,0 +1,33 @@
+
+#Explorando o ambiente:
+mysqld_multi report
+mysql -uroot -P3306 -e"SELECT @@datadir, @@port, @@server_uuid;"
+mysql -uroot -P3307 -e"SELECT @@datadir, @@port, @@server_uuid;"
+mysql -uroot -P3308 -e"SELECT @@datadir, @@port, @@server_uuid;"
+mysql -uroot -P3309 -e"SELECT @@datadir, @@port, @@server_uuid;"
+
+#
+mysqlfabric group lookup_servers my_group
+
+#
+mysqlfabric group activate my_group
+cat /var/log/fabric.log
+
+
+mysqlfabric group lookup_servers my_group
+mysqlfabric server set_status 6b032319-3594-11e5-aae8-0800270336f0 SPARE
+mysqlfabric server set_status 6b032319-3594-11e5-aae8-0800270336f0 SECONDARY
+mysqlfabric server set_status 6b0411ee-3594-11e5-aae8-0800270336f0 SPARE
+mysqlfabric server set_status 6b0411ee-3594-11e5-aae8-0800270336f0 SECONDARY
+
+mysqlfabric group lookup_servers my_group
+mysqlfabric group promote my_group
+mysqlfabric group lookup_servers my_group
+mysqlfabric server set_status 6b046f8a-3594-11e5-aae8-0800270336f0 SPARE
+mysqlfabric server set_status 6b046f8a-3594-11e5-aae8-0800270336f0 SECONDARY
+mysqlfabric group lookup_servers my_group
+
+group promote my_group --slave_id=6b046f8a-3594-11e5-aae8-0800270336f0
+
+
+
