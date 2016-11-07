@@ -18,11 +18,13 @@ The rest of the software will be automatically downloaded and installed.
 
 ## How to use
 
+- Create a directory to be the home of your Virtual Machine;
+- Donwload [this Vagrantfile](https://raw.githubusercontent.com/alastori/mysql-fabric-demo/master/Vagrantfile) to this new directory;
 - Inside the directory, run ```vagrant up```;
   - It will download CentOS 7, MySQL Server, MySQL Fabric. This will take several minutes to finish;
   - Also this repository will be downloaded inside the VM folder ```/vagrant```;
 - Access the VM with ```vagrant ssh```;
-  - password for users ```root``` and ```vagrant``` is is ```vagrant```;
+  - password for users ```root``` and ```vagrant``` is ```vagrant```;
 - Run ```/vagrant/fabric-demo-create.sh``` or it's commands once a time to see Fabric setup process;
 - Run ```provision-apache-php.sh``` as a pre-req for next steps;
 - Follow the demo steps in ```/vagrant/fabric-demo-t?.sh```;
