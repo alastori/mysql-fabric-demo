@@ -6,7 +6,7 @@ A demonstration of MySQL Fabric 1.5 capabilities using vagrant+virtualbox.
 ## Synopsis
 These are files to create a environment for demonstrantion of [MySQL Fabric 1.5](http://dev.mysql.com/doc/mysql-utilities/1.5/en/fabric.html) using [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/) on CentOS 7.
 
-## Architecute
+## Architecture
 There will be one single VM with 4 MySQL instances accessible through ports 3306 to 3309.
 
 ## Pre-reqs
@@ -18,12 +18,14 @@ The rest of the software will be automatically downloaded and installed.
 
 ## How to use
 
-- Inside the directory, run ```vagrant up```. 
-  - It will download CentOS 7, MySQL Server, MySQL Fabric. This will take several minutes to finish.
-  - Also this repository will be downloaded inside the VM folder ```/vagrant```. 
-- Access the VM with ```vagrant ssh```.
-- Issue the commands from ```/vagrant/fabric-demo-create.sh```.
-- Follow the demo steps in ```/vagrant/fabric-demo-t?.sh```.
+- Inside the directory, run ```vagrant up```;
+  - It will download CentOS 7, MySQL Server, MySQL Fabric. This will take several minutes to finish;
+  - Also this repository will be downloaded inside the VM folder ```/vagrant```;
+- Access the VM with ```vagrant ssh```;
+  - password for users ```root``` and ```vagrant``` is is ```vagrant```;
+- Run ```/vagrant/fabric-demo-create.sh``` or it's commands once a time to see Fabric setup process;
+- Run ```provision-apache-php.sh``` as a pre-req for next steps;
+- Follow the demo steps in ```/vagrant/fabric-demo-t?.sh```;
   
 ## Rollback
 

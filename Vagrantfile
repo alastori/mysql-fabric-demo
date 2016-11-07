@@ -19,10 +19,11 @@ Vagrant.configure(2) do |config|
     mysqlserver.vm.network :forwarded_port, host: 28080, guest: 80
     
     #mysqlserver.vm.provision :shell, inline: "yum-config-manager --disable epel", privileged: true
+    mysqlserver.vm.provision :shell, inline: "yum -y install wget", privileged: true
     mysqlserver.vm.provision :shell, path: "https://raw.githubusercontent.com/alastori/mysql-fabric-demo/master/download-git-repo.sh", privileged: true
     mysqlserver.vm.provision :shell, path: "https://raw.githubusercontent.com/alastori/mysql-fabric-demo/master/provision-mysql-yum-repo-el7.sh", privileged: true
     mysqlserver.vm.provision :shell, path: "https://raw.githubusercontent.com/alastori/mysql-fabric-demo/master/provision-mysql-community-57-el7-yum.sh", privileged: true
-    mysqlserver.vm.provision :shell, path: "https://raw.githubusercontent.com/alastori/mysql-fabric-demo/master/fabric-demo-install.sh", privileged: true
+    #mysqlserver.vm.provision :shell, path: "https://raw.githubusercontent.com/alastori/mysql-fabric-demo/master/fabric-demo-install.sh", privileged: true
 
   end  
  

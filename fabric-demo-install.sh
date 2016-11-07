@@ -9,7 +9,7 @@ MYSQL_ADMIN_USER=root
 MYSQL_ADMIN_PWD="Root#123"
 
 #Stop running MySQL instance at port 3306
-mysqladmin -u$MYSQL_ADMIN_USER -p$MYSQL_ADMIN_PWD -P$port shutdown
+mysqladmin -u$MYSQL_ADMIN_USER -p$MYSQL_ADMIN_PWD -P3306 shutdown
 sleep 6
 ps -ef | grep mysqld
 
@@ -52,6 +52,7 @@ source /root/.bashrc
 #Starting MySQL Server  
 echo "Starting MySQL instances..."
 cp /vagrant/mysqld_multi $MYSQL_BASEDIR/bin
+chmod +x $MYSQL_BASEDIR/bin/mysqld_multi
 cd $MYSQL_BASEDIR
 mysqld_multi --no-log --password=$MYSQL_ADMIN_PWD report
 mysqld_multi start
@@ -69,10 +70,10 @@ mysqld_multi --no-log --password=$MYSQL_ADMIN_PWD report
 #Setting users for fabric and for the application + resetting master just in case
 for x in {0..3}; do
     port=$((3306 + $x))
-    mysql -u$MYSQL_ADMIN_USER -p$MYSQL_ADMIN_PWD -P$port -e"CREATE USER 'fabric'@'%' IDENTIFIED BY 'secret'; GRANT ALL ON *.* TO 'fabric'@'%';"
-    mysql -u$MYSQL_ADMIN_USER -p$MYSQL_ADMIN_PWD -P$port -e"CREATE USER 'fabric'@'localhost' IDENTIFIED BY 'secret'; GRANT ALL ON *.* TO 'fabric'@'localhost';"
-    mysql -u$MYSQL_ADMIN_USER -p$MYSQL_ADMIN_PWD -P$port -e"CREATE USER 'web'@'%' IDENTIFIED BY 'web'; GRANT ALL ON *.* TO 'web'@'%';"
-    mysql -u$MYSQL_ADMIN_USER -p$MYSQL_ADMIN_PWD -P$port -e"CREATE USER 'fabric'@'localhost' IDENTIFIED BY 'web'; GRANT ALL ON *.* TO 'web'@'localhost';"
+    mysql -u$MYSQL_ADMIN_USER -p$MYSQL_ADMIN_PWD -P$port -e"CREATE USER IF NOT EXISTS 'fabric'@'%' IDENTIFIED BY 'secret'; GRANT ALL ON *.* TO 'fabric'@'%';"
+    mysql -u$MYSQL_ADMIN_USER -p$MYSQL_ADMIN_PWD -P$port -e"CREATE USER IF NOT EXISTS 'fabric'@'localhost' IDENTIFIED BY 'secret'; GRANT ALL ON *.* TO 'fabric'@'localhost';"
+    mysql -u$MYSQL_ADMIN_USER -p$MYSQL_ADMIN_PWD -P$port -e"CREATE USER IF NOT EXISTS 'web'@'%' IDENTIFIED BY 'web'; GRANT ALL ON *.* TO 'web'@'%';"
+    mysql -u$MYSQL_ADMIN_USER -p$MYSQL_ADMIN_PWD -P$port -e"CREATE USER IF NOT EXISTS 'web'@'localhost' IDENTIFIED BY 'web'; GRANT ALL ON *.* TO 'web'@'localhost';"
     mysql -u$MYSQL_ADMIN_USER -p$MYSQL_ADMIN_PWD -P$port -e"RESET MASTER;"
 done
 
