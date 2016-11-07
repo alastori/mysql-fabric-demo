@@ -26,8 +26,8 @@ The rest of the software will be automatically downloaded and installed.
 - Access the VM with ```vagrant ssh```;
   - password for users ```root``` and ```vagrant``` is ```vagrant```;
 - Run ```/vagrant/fabric-demo-create.sh``` or it's commands once a time to see Fabric setup process;
-- Run ```provision-apache-php.sh``` as a pre-req for next steps;
-- Follow the demo steps in ```/vagrant/fabric-demo-t?.sh```;
+- (optional) Run ```/vagrant/provision-apache-php.sh``` as a pre-req for next steps;
+- (optional) Follow the demo steps in ```/vagrant/fabric-demo-t?.sh```;
   
 ## Rollback
 
